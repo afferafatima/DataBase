@@ -1,0 +1,73 @@
+Q1
+SELECT OrderID,CustomerID,EmployeeID,DATEDIFF(day, RequiredDate, ShippedDate) AS DaysDelayed FROM [Northwind].[dbo].[Orders] WHERE ShippedDate > RequiredDate;
+***
+
+	
+Q2
+SELECT DISTINCT Country FROM [Northwind].[dbo].[Employees];
+***
+
+	
+Q3
+SELECT EmployeeID,LastName,FirstName,Title, ReportsTo FROM [Northwind].[dbo].[Employees] WHERE ReportsTo IS NULL;
+***
+
+
+Q4
+SELECT ProductID,ProductName FROM [Northwind].[dbo].[Products] WHERE Discontinued = 1;
+***
+
+
+Q5
+SELECT DISTINCT OrderID FROM [Northwind].[dbo].[Order Details] WHERE Discount = 0 OR Discount IS NULL;
+***
+
+
+Q6
+SELECT CustomerID,ContactName,CompanyName FROM [Northwind].[dbo].[Customers] WHERE Region IS NULL OR Region = '';
+***
+
+
+Q7
+SELECT CustomerID, ContactName, Phone FROM [Northwind].[dbo].[Customers] WHERE Country IN ('UK', 'USA');
+***
+
+
+Q8
+SELECT SupplierID, CompanyName, HomePage FROM [Northwind].[dbo].[Suppliers] WHERE HomePage IS NOT NULL;
+***
+
+
+Q9
+SELECT DISTINCT Country FROM [Northwind].[dbo].[Customers] WHERE CustomerID IN ( SELECT DISTINCT CustomerID FROM [Northwind].[dbo].[Orders] WHERE YEAR(OrderDate) = 1997);
+***
+
+
+Q10
+SELECT DISTINCT CustomerID FROM [Northwind].[dbo].[Customers] WHERE CustomerID NOT IN (SELECT DISTINCT CustomerID FROM [Northwind].[dbo].[Orders]    WHERE ShippedDate IS NOT NULL);
+***
+
+
+Q11
+SELECT SupplierID, CompanyName, City FROM [Northwind].[dbo].[Suppliers];
+***
+
+
+Q12
+SELECT SupplierID, CompanyName, City FROM [Northwind].[dbo].[Suppliers];
+***
+
+
+Q13
+SELECT ProductName FROM [Northwind].[dbo].[Products] WHERE Discontinued = 0;
+***
+
+
+Q14
+SELECT OrderID FROM [Northwind].[dbo].[Order Details] WHERE Discount <= 0.1;
+***
+
+
+Q15
+SELECT EmployeeID, FirstName + ' ' + LastName AS EmployeeName, Phone + ' ext. ' + COALESCE(Extension, '') AS ContactNumberWithExtension FROM [Northwind].[dbo].[Employees] WHERE Region IS NULL OR Region = '';
+***

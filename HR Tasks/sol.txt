@@ -1,0 +1,194 @@
+--1
+SELECT CONCAT(last_name , ',' , JOB_ID) AS Employee , job_id as Title 
+from employees;
+
+--2
+select last_name as LastName , salary as Employee_salary
+from employees
+where salary > 12000;
+
+--3
+select last_name as LastName , salary as Employee_salary
+from employees
+where salary < 5000 or salary > 12000;
+
+--4
+select last_name as LastName , hire_date as Hire_date 
+from employees
+where year(hire_date) = '1994';
+
+--5
+Create a report to display the
+ast name, salary, and 
+commission of all employees 
+who earn commissions.
+Sort data in descending order of 
+salary and commissions
+select last_name AS LAST_NAME , salary as Salary ,com
+
+--6
+select last_name as Last_Name 
+from employees
+where substring(last_name,3,1) = 'a';
+
+--7
+select last_name as Last_Name 
+from employees
+where last_name LIKE '%a%' and last_name LIKE '%e%';
+
+--8
+SELECT emp.last_name, job.job_title AS job, emp.salary
+FROM [HR].[dbo].[employees] emp
+JOIN [HR].[dbo].[jobs] job ON emp.job_id = job.job_id
+WHERE job.job_title IN ('Stock Clerk', 'Sales Representative')
+AND emp.salary NOT IN (2500, 3500, 7000);
+
+--9
+SELECT employee_id, last_name, salary, ROUND(salary * 0.15,0) AS increased_salary
+FROM [HR].[dbo].[employees];
+
+--10
+SELECT CONCAT(UPPER(LEFT(last_name, 1)), LOWER(SUBSTRING(last_name, 2, LEN(last_name) - 1))) AS Last_Name, LEN(last_name) AS Last_Name_Length
+FROM  employees
+WHERE last_name LIKE 'J%' OR last_name LIKE 'A%' OR last_name LIKE 'M%'
+ORDER BY Last_Name;
+
+--11
+SELECT last_name,CEILING(DATEDIFF(MONTH, hire_date, GETDATE())) AS MONTHS_WORKED
+FROM employees
+ORDER BY MONTHS_WORKED;
+
+--12
+SELECT last_name,CONCAT('earns ', salary, ' monthly but wants ', salary * 3) AS Dream_Salaries
+FROM employees;
+
+--13
+SELECT last_name, CONCAT('$$$$$$$$$$', FORMAT(salary, '######0.00')) AS SALARY
+FROM employees;
+
+--14
+SELECT last_name,FORMAT(hire_date, 'dddd, MMMM d, yyyy') AS hire_date,FORMAT(DATEADD(WEEKDAY, 1, DATEADD(MONTH, 6, hire_date)), 'dddd, MMMM d, yyyy') AS REVIEW
+FROM employees;
+
+--15
+SELECT last_name,hire_date,DATENAME(WEEKDAY, hire_date) AS DAY
+FROM employees
+ORDER BY CASE 
+        WHEN DATENAME(WEEKDAY, hire_date) = 'Monday' THEN 1
+        WHEN DATENAME(WEEKDAY, hire_date) = 'Tuesday' THEN 2
+        WHEN DATENAME(WEEKDAY, hire_date) = 'Wednesday' THEN 3
+        WHEN DATENAME(WEEKDAY, hire_date) = 'Thursday' THEN 4
+        WHEN DATENAME(WEEKDAY, hire_date) = 'Friday' THEN 5
+        WHEN DATENAME(WEEKDAY, hire_date) = 'Saturday' THEN 6
+        WHEN DATENAME(WEEKDAY, hire_date) = 'Sunday' THEN 7
+ END;
+
+
+--16
+SELECT last_name,'No Commission' AS COMM
+FROM [HR].[dbo].[employees];
+
+--17
+SELECT LEFT(last_name, 8) AS EMPLOYEE_NAME,REPLICATE('*', salary / 1000) AS SALARY_AST
+FROM employees
+ORDER BY salary DESC;
+
+--18
+SELECT last_name, CASE 
+        WHEN CAST(job_id AS VARCHAR) = 'AD_PRES' THEN 'A'
+        WHEN CAST(job_id AS VARCHAR) = 'ST_MAN' THEN 'B'
+        WHEN CAST(job_id AS VARCHAR) = 'IT_PROG' THEN 'C'
+        WHEN CAST(job_id AS VARCHAR) = 'SA_REP' THEN 'D'
+        WHEN CAST(job_id AS VARCHAR) = 'ST_CLERK' THEN 'E'
+        ELSE '0'
+    END AS Grade
+FROM employees;
+
+--19
+SELECT 
+    MAX(salary) AS Maximum,
+    MIN(salary) AS Minimum,
+    SUM(salary) AS Sum,
+    AVG(salary) AS Average
+FROM 
+    employees;
+
+--20
+SELECT job_id,
+    MAX(salary) AS Maximum,
+    MIN(salary) AS Minimum,
+    SUM(salary) AS Sum,
+    AVG(salary) AS Average
+FROM employees
+GROUP BY job_id;
+
+--21
+SELECT job_id, COUNT(*) AS number_of_people
+FROM employees
+GROUP BY job_id;
+
+--22
+SELECT 'Total' AS Year, COUNT(*) AS Total_Employees,
+    SUM(CASE WHEN YEAR(hire_date) = 1995 THEN 1 ELSE 0 END) AS Hired_1995,
+    SUM(CASE WHEN YEAR(hire_date) = 1996 THEN 1 ELSE 0 END) AS Hired_1996,
+    SUM(CASE WHEN YEAR(hire_date) = 1997 THEN 1 ELSE 0 END) AS Hired_1997,
+    SUM(CASE WHEN YEAR(hire_date) = 1998 THEN 1 ELSE 0 END) AS Hired_1998
+FROM employees;
+
+--23
+SELECT manager_id, MIN(salary) AS lowest_salary
+FROM employees
+WHERE manager_id IS NOT NULL
+GROUP BY manager_id
+HAVING MIN(salary) > 6000
+ORDER BY lowest_salary DESC;
+
+--24
+SELECT L.location_id,
+    L.street_address,
+    L.city,
+    L.state_province,
+    C.country_name
+FROM LOCATIONS L
+JOIN COUNTRIES C ON L.country_id = C.country_id;
+
+--25
+SELECT e.last_name,
+    d.department_id,
+    d.department_name
+FROM employees e
+JOIN departments d ON e.department_id = d.department_id;
+
+--26
+SELECT e.last_name,
+    e.job_id,
+    e.department_id,
+    d.department_name
+FROM employees e
+JOIN departments d ON e.department_id = d.department_id
+JOIN locations l ON d.location_id = l.location_id
+WHERE l.city = 'Toronto';
+
+--27
+SELECT e.last_name AS Employee_Last_Name,
+    e.employee_id AS Employee_Number,
+    m.last_name AS Manager_Last_Name,
+    e.manager_id AS Manager_Number
+FROM employees e
+LEFT JOIN employees m ON e.manager_id = m.employee_id;
+
+--28
+SELECT e.last_name AS Employee_Last_Name,
+    e.employee_id AS Employee_Number,
+    COALESCE(m.last_name, 'No Manager') AS Manager_Last_Name,
+    e.manager_id AS Manager_Number
+FROM employees e
+LEFT JOIN employees m ON e.manager_id = m.employee_id;
+
+--29
+SELECT e.last_name AS Last_name,
+    e.job_id,
+    d.department_name,
+    e.salary 
+FROM employees e 
+JOIN departments d ON e.department_id = d.department_id;

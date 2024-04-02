@@ -1,0 +1,11 @@
+E:\Study\Semester 4\DB Lab\CRUD\bin\Debug\CRUD.exe.config
+E:\Study\Semester 4\DB Lab\CRUD\bin\Debug\CRUD.exe
+E:\Study\Semester 4\DB Lab\CRUD\bin\Debug\CRUD.pdb
+E:\Study\Semester 4\DB Lab\CRUD\obj\Debug\CRUD.csproj.AssemblyReference.cache
+E:\Study\Semester 4\DB Lab\CRUD\obj\Debug\CRUD.csproj.SuggestedBindingRedirects.cache
+E:\Study\Semester 4\DB Lab\CRUD\obj\Debug\CRUD.Form1.resources
+E:\Study\Semester 4\DB Lab\CRUD\obj\Debug\CRUD.Properties.Resources.resources
+E:\Study\Semester 4\DB Lab\CRUD\obj\Debug\CRUD.csproj.GenerateResource.cache
+E:\Study\Semester 4\DB Lab\CRUD\obj\Debug\CRUD.csproj.CoreCompileInputs.cache
+E:\Study\Semester 4\DB Lab\CRUD\obj\Debug\CRUD.exe
+E:\Study\Semester 4\DB Lab\CRUD\obj\Debug\CRUD.pdb
